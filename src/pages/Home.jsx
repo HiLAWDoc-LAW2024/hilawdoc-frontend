@@ -7,7 +7,6 @@ function HomePage() {
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem('token');
-        console.log(token)
       try {
         const response = await fetch(`http://localhost:8000/verify-token/${token}`);
 

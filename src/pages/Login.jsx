@@ -36,7 +36,6 @@ function Login() {
         body: formDetails,
       });
 
-      console.log(response);
 
       setLoading(false);
 
@@ -49,7 +48,6 @@ function Login() {
         setError(errorData.detail || 'Authentication failed!');
       }
     } catch (error) {
-      console.log("error: " + error);
       setLoading(false);
       setError('An error occurred. Please try again later.');
     }
