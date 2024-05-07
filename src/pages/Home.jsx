@@ -22,7 +22,7 @@ function HomePage() {
     verifyToken();
   }, [navigate]);
 
-  return <div>Welcome to HiLAWDoc</div>;
+  return <div>This is home pages</div>;
 }
 
 export default HomePage;
