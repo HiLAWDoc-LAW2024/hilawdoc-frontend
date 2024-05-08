@@ -5,7 +5,6 @@ export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,10 +17,13 @@ export default function LoginForm() {
     return true;
   };
 
+  const moveToRegisterAccountPage = () => {
+    navigate('/register');
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validateForm()) return;
-    setLoading(true);
 
     const formDetails = new URLSearchParams();
     formDetails.append('username', username);
@@ -36,18 +38,15 @@ export default function LoginForm() {
         body: formDetails,
       });
 
-      setLoading(false);
-
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.access_token);
-        navigate('/home');
+        navigate('/');
       } else {
         const errorData = await response.json();
         setError(errorData.detail || 'Authentication failed!');
       }
     } catch (error) {
-      setLoading(false);
       setError('An error occurred. Please try again later.');
     }
   };
@@ -92,10 +91,15 @@ export default function LoginForm() {
               Sign In
             </button>
           </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
         <div className='mt-8 flex justify-center items-center'>
           <p>Don't have account?</p>
-          <button className='text-blue-500 text-base font-medium ml-1'>Register now</button>
+          <button
+            onClick={moveToRegisterAccountPage}
+            className='text-blue-500 text-base font-medium ml-1'>
+            Register now
+          </button>
         </div>
       </div>
     </div>

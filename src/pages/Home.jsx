@@ -5,8 +5,11 @@ function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
     const verifyToken = async () => {
-      const token = localStorage.getItem('token');
       try {
         const response = await fetch(`http://localhost:8000/verify-token/${token}`);
 
@@ -14,15 +17,30 @@ function HomePage() {
           throw new Error('Token verification failed');
         }
       } catch (error) {
-        localStorage.removeItem('token');
-        navigate('/');
+        handleLogout();
       }
     };
 
     verifyToken();
   }, [navigate]);
 
-  return <div>This is home pages</div>;
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  return (
+    <div className="">
+      <button
+        onClick={handleLogout}
+        className="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold m-4 py-2 px-4 rounded">
+        Logout
+      </button>
+      <div className='h-screen flex justify-center items-center'>
+        <h1>This is home page</h1>
+      </div>
+    </div>
+  );
 }
 
 export default HomePage;
