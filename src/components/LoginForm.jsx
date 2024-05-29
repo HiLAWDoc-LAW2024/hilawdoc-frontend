@@ -57,7 +57,7 @@ export default function LoginForm() {
       <div>
         <form onSubmit={handleSubmit}>
           <div className='mt-8'>
-            <label className='text-lg font-medium' htmlFor="username">Username</label>
+            <label className='text-base font-medium' htmlFor="username">Username</label>
             <input
               className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
               type="text"
@@ -69,7 +69,7 @@ export default function LoginForm() {
             />
           </div>
           <div className='mt-4'>
-            <label className='text-lg font-medium' htmlFor="password">Password</label>
+            <label className='text-base font-medium' htmlFor="password">Password</label>
             <input
               className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
               type="password"
@@ -79,10 +79,6 @@ export default function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Enter your password'
             />
-          </div>
-          <div className='mt-2 flex'>
-            <p>Forgot password?</p>
-            <button className='text-blue-500 text-base font-medium ml-1'>Click here</button>
           </div>
           <div className='mt-8 flex flex-col gap-y-4'>
             <button
