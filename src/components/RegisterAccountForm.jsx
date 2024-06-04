@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function LoginForm() {
+export default function RegisterAccountForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -36,7 +36,8 @@ export default function LoginForm() {
       username,
       password,
       email,
-      full_name: fullname
+      full_name: fullname,
+      is_doctor: false
     };
 
     try {

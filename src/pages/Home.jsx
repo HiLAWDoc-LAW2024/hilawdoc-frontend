@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import NavbarDoctor from '../components/NavbarDoctor';
+import NavbarUser from '../components/NavbarUser';
 import HomeUser from '../components/HomeUser';
 import HomeDoctor from '../components/HomeDoctor';
 
 function HomePage() {
   const navigate = useNavigate();
   const [role, setRole] = useState(null);
+  const [sub, setSub] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -24,6 +27,7 @@ function HomePage() {
 
         const decoded = jwtDecode(token);
         setRole(decoded.role);
+        setSub(decoded.sub);
       } catch (error) {
         console.log('error: ' + error);
         handleLogout();
@@ -44,11 +48,7 @@ function HomePage() {
 
   return (
     <div className="">
-      <button
-        onClick={handleLogout}
-        className="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold m-4 py-2 px-4 rounded">
-        Logout
-      </button>
+      {role === 'user' ? <NavbarUser username={sub} /> : role === 'doctor' ? <NavbarDoctor username={sub} /> : null}
       <div className='h-screen flex justify-center items-center'>
         {role === 'user' ? <HomeUser /> : role === 'doctor' ? <HomeDoctor /> : <p>Invalid role</p>}
       </div>
